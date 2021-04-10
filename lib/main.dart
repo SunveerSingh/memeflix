@@ -1,5 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:memeflix/homescreen.dart';
+import 'package:memeflix/handler.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MemeFlix',
       theme: ThemeData(),
-      home: HomeScreen(),
+      home: CreateAccount(),
     );
   }
 }

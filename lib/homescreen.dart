@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:memeflix/responsive.dart';
 import 'package:memeflix/screens/feed.dart';
 import 'package:memeflix/screens/search.dart';
 import 'package:memeflix/screens/your_memes.dart';
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         animationDuration: Duration(milliseconds: 200),
-        color: Colors.black,
+        color: themeGreen,
         height: 50,
         backgroundColor: Colors.transparent,
         items: <Widget>[

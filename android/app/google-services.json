@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "451678212545",
+    "project_id": "memeflixflutter",
+    "storage_bucket": "memeflixflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:451678212545:android:40f765a8975945a14d9f40",
+        "android_client_info": {
+          "package_name": "com.example.memeflix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "451678212545-ar6chumqgae9anfrpr4ug4ikgcib6gi8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUlioBqBQVA4GyM-28mPoJsn8P6fXDN3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "451678212545-ar6chumqgae9anfrpr4ug4ikgcib6gi8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

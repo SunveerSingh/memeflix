@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:memeflix/model/images.dart';
+import 'package:memeflix/model/search_model.dart';
+import 'package:memeflix/responsive.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -17,6 +19,9 @@ class _SearchPageState extends State<SearchPage> {
       physics: ScrollPhysics(),
       child: Column(
         children: [
+          Container(
+            child: Image.asset('assets/memeflix_header.png'),
+          ),
           Container(
             child: Row(
               children: [
@@ -43,11 +48,21 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: themeGreen,
                       borderRadius: BorderRadius.circular(12)),
                   child: IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {},
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                SearchMovie(searchText: searchText)),
+                      );
+                    },
                     color: Colors.white,
                   ),
                 )
