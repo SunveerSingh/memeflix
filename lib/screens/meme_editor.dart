@@ -112,7 +112,7 @@ class _MemeEditorState extends State<MemeEditor> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Column(
                   children: <Widget>[
                     TextField(

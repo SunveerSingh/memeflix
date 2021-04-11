@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:memeflix/responsive.dart';
 
@@ -10,6 +11,7 @@ class FeedPage extends StatefulWidget {
 class _FeedPageState extends State<FeedPage> {
   final CollectionReference memesList =
       FirebaseFirestore.instance.collection("memes");
+
   getAxisCount() {
     if (isMobile(context)) {
       return 1;
@@ -26,6 +28,7 @@ class _FeedPageState extends State<FeedPage> {
     //returns restaurant list for public view
     return StreamBuilder<QuerySnapshot>(
       stream: memesList.snapshots(),
+      // ignore: missing_return
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Text('Something went wrong');
@@ -34,43 +37,40 @@ class _FeedPageState extends State<FeedPage> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Text("Loading");
         }
+
         if (snapshot.hasData) {
-          return new GridView.count(
-            crossAxisCount: getAxisCount(),
+          return new ListView(
             physics: ScrollPhysics(),
             shrinkWrap: true,
             children: snapshot.data.docs.map((DocumentSnapshot document) {
               return Container(
-                margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white),
+                padding: EdgeInsets.only(left: 15, right: 15, bottom: 40),
                 child: InkResponse(
                   onTap: () {},
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: Container(
-                            height: 250,
-                            width: 350,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image:
-                                      NetworkImage(document.data()['imageUrl']),
-                                  fit: BoxFit.cover),
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Uploaded By: ${document.data()['uploadedBy']}",
-                          textAlign: TextAlign.start,
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ],
+                  child: Image.network(
+                    document.data()['imageUrl'],
+                    loadingBuilder: (context, child, loadingProgress) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(14)),
+                            child: Container(
+                              constraints: BoxConstraints(minHeight: 250),
+                              child: child
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.0, left: 5.0),
+                            child: Text(
+                              "Uploaded By: ${document.data()['uploadedBy']}",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               );
@@ -84,16 +84,27 @@ class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      physics: ScrollPhysics(),
-      child: Column(
-        children: [
-          Container(
-            child: Image.asset('assets/memeflix_header.png'),
-          ),
-          getMemesList(),
-        ],
+      body: SingleChildScrollView(
+        physics: ScrollPhysics(),
+        // padding: EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 40),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              // child: Image.asset('assets/memeflix_header.png'),
+              margin: EdgeInsets.only(top: 40, bottom: 35, left: 20),
+              child: Text(
+                'Public Feed',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            getMemesList(),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

@@ -138,6 +138,7 @@ class _GetImagesState extends State<GetImages> {
                                       height: 196,
                                       width: size.width,
                                       decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(14),
                                         image: DecorationImage(
                                             image: NetworkImage(
                                                 "https://www.themoviedb.org/t/p/original${_filepath(snapshot.data[index])}"),

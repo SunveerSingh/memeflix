@@ -30,6 +30,7 @@ class _YourMemesState extends State<YourMemes> {
     //returns restaurant list for public view
     return StreamBuilder<QuerySnapshot>(
       stream: memesList.snapshots(),
+      // ignore: missing_return
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Text('Something went wrong');
@@ -39,40 +40,22 @@ class _YourMemesState extends State<YourMemes> {
           return Text("Loading");
         }
         if (snapshot.hasData) {
-          return new GridView.count(
+          return new ListView(
             physics: ScrollPhysics(),
-            crossAxisCount: getAxisCount(),
+            // crossAxisCount: getAxisCount(),
             shrinkWrap: true,
             children: snapshot.data.docs.map((DocumentSnapshot document) {
               return Container(
-                margin: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white),
+                padding: EdgeInsets.only(left: 15, right: 15, bottom: 25),
                 child: InkResponse(
                   onTap: () {},
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                        child: Container(
-                            height: 250,
-                            width: 350,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image:
-                                      NetworkImage(document.data()['imageUrl']),
-                                  fit: BoxFit.cover),
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Uploaded By: ${document.data()['uploadedBy']}",
-                          textAlign: TextAlign.start,
-                          style: TextStyle(fontSize: 16),
-                        ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(14)),
+                        child: Image.network(document.data()['imageUrl']),
                       ),
                     ],
                   ),
@@ -101,9 +84,18 @@ class _YourMemesState extends State<YourMemes> {
         body: SingleChildScrollView(
           physics: ScrollPhysics(),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                child: Image.asset('assets/memeflix_header.png'),
+                // child: Image.asset('assets/memeflix_header.png'),
+                margin: EdgeInsets.only(top: 40, bottom: 35, left: 20),
+                child: Text(
+                  'My Memes',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               getMemesList(),
             ],

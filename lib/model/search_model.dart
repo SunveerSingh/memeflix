@@ -70,7 +70,19 @@ class _SearchMovieState extends State<SearchMovie> {
       body: SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+
           children: [
+            Container(
+              margin: EdgeInsets.only(left: 24, top: 24),
+              child: Text(
+                'Select a movie:',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             FutureBuilder<List<dynamic>>(
                 future: futureMovies,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -105,13 +117,13 @@ class _SearchMovieState extends State<SearchMovie> {
                                         child: Container(
                                       padding: EdgeInsets.all(10),
                                       margin: EdgeInsets.all(8),
-                                      color: Colors.white,
+                                      // color: Colors.white,
                                       height: 500,
                                       width: size.width,
                                       child: Wrap(
                                         children: [
                                           Container(
-                                              margin: EdgeInsets.all(8),
+                                              // margin: EdgeInsets.all(8),
                                               height: 450,
                                               width: size.width - 50,
                                               decoration: BoxDecoration(
@@ -121,6 +133,7 @@ class _SearchMovieState extends State<SearchMovie> {
                                                     fit: BoxFit.cover),
                                               )),
                                           Container(
+                                            margin: EdgeInsets.only(top: 5),
                                             child: Text(
                                                 "${_title(snapshot.data[index])}(${_releaseDate(snapshot.data[index])}) "),
                                           ),

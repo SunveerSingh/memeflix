@@ -13,10 +13,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _page = 0;
   final screens = [FeedPage(), SearchPage(), YourMemes()];
+  final titles = {
+    0: 'Public Feed',
+    1: 'Meme Generator',
+    2: 'Your Memes'
+  };
   GlobalKey _bottomNavigationKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text(titles[_page]),
+      //   backgroundColor: themeGreen,
+      // ),
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         animationDuration: Duration(milliseconds: 200),
@@ -46,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ),
-      body: screens[_page],
+      body: SafeArea(
+        child: screens[_page],
+      ),
     );
   }
 }
