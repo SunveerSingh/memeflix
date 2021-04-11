@@ -51,12 +51,34 @@ class _UploadScreenState extends State<UploadScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-                margin: EdgeInsets.all(20), child: Image.file(widget.image)),
+              margin: EdgeInsets.only(bottom: 10),
+              child: Text(
+                'Meme Created Successfully!',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Image.file(widget.image),
+            ),
+            Text(
+              'Your meme has been saved to your gallery.',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             Container(
               height: 50,
               width: 300,
+              margin: EdgeInsets.only(top: 35),
               decoration: BoxDecoration(
-                  color: themeGreen, borderRadius: BorderRadius.circular(10)),
+                color: themeGreen,
+                borderRadius: BorderRadius.circular(10),
+              ),
               // ignore: deprecated_member_use
               child: FlatButton(
                 onPressed: () {
@@ -67,7 +89,29 @@ class _UploadScreenState extends State<UploadScreen> {
                   );
                 },
                 child: Text(
-                  'Share to Feed',
+                  'Share to Public Feed',
+                  style: TextStyle(color: Colors.white, fontSize: 25),
+                ),
+              ),
+            ),
+            Container(
+              height: 50,
+              width: 300,
+              margin: EdgeInsets.only(top: 10),
+              decoration: BoxDecoration(
+                color: Colors.black45,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              // ignore: deprecated_member_use
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                },
+                child: Text(
+                  'Exit',
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
